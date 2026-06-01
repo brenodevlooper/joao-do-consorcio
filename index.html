@@ -103,9 +103,130 @@
       background: linear-gradient(135deg,#D4682A,#B85520);
       box-shadow: 0 8px 32px rgba(212,104,42,.4);
     }
+
+    /* ── INTRO OVERLAY ── */
+    #intro-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0C0E1A;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      animation: overlayOut 0.7s cubic-bezier(0.76,0,0.24,1) 2s forwards;
+    }
+    @keyframes overlayOut {
+      0%   { clip-path: inset(0 0 0 0); }
+      100% { clip-path: inset(0 0 100% 0); pointer-events: none; }
+    }
+    #intro-logo {
+      animation: logoPop 0.9s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both;
+    }
+    @keyframes logoPop {
+      0%   { opacity: 0; transform: scale(0.5) translateY(30px); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0);      filter: blur(0); }
+    }
+    #intro-line {
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #D4682A, transparent);
+      animation: lineGrow 0.8s ease-out 1s forwards;
+    }
+    @keyframes lineGrow { to { width: 200px; } }
+    #intro-text {
+      opacity: 0; font-family: 'Sora',sans-serif; font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,.4);
+      animation: fadeInText 0.6s ease 1.2s forwards;
+    }
+    @keyframes fadeInText { to { opacity: 1; } }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 9998;
+      background: linear-gradient(90deg, #D4682A, #F4A070);
+      width: 0%; will-change: width;
+    }
+
+    /* ── FLOATING ORBS ── */
+    @keyframes floatA {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(40px,-30px) scale(1.07); }
+      66%      { transform: translate(-20px,20px) scale(0.95); }
+    }
+    @keyframes floatB {
+      0%,100% { transform: translate(0,0); }
+      50%      { transform: translate(-35px,40px) scale(1.1); }
+    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .orb-a { animation: floatA  9s ease-in-out infinite; }
+    .orb-b { animation: floatB 13s ease-in-out infinite; }
+    .orb-c { animation: floatA 17s ease-in-out infinite reverse; }
+
+    /* ── SHIMMER HERO TEXT ── */
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    .text-shimmer {
+      background: linear-gradient(90deg, #D4682A 0%, #F4A070 35%, #fff8f5 50%, #F4A070 65%, #D4682A 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+    }
+
+    /* ── CARD GLARE ── */
+    .card-glare { position: relative; overflow: hidden; }
+    .card-glare::after {
+      content: '';
+      position: absolute; top: -50%; left: -70%;
+      width: 45%; height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent);
+      transform: skewX(-20deg);
+      transition: left .65s ease;
+      pointer-events: none;
+    }
+    .card-glare:hover::after { left: 130%; }
+
+    /* ── 3D TILT ── */
+    .tilt-wrap {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform .08s linear;
+    }
+
+    /* ── BUTTON RIPPLE ── */
+    .ripple-btn { position: relative; overflow: hidden; }
+    .ripple-wave {
+      position: absolute; border-radius: 50%;
+      transform: scale(0); opacity: 1;
+      background: rgba(255,255,255,.22);
+      animation: rippleAnim .55s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim { to { transform: scale(5); opacity: 0; } }
+
+    /* ── ANIMATED COUNTER ── */
+    .stat-num { display: inline-block; }
+
+    /* ── STEP NUM PULSE ── */
+    @keyframes stepGlow {
+      0%,100% { box-shadow: 0 8px 32px rgba(212,104,42,.4); }
+      50%      { box-shadow: 0 8px 52px rgba(212,104,42,.85), 0 0 0 10px rgba(212,104,42,.12); }
+    }
+    .step-num { animation: stepGlow 2.8s ease-in-out infinite; }
+
+    /* ── HERO PARTICLES CANVAS ── */
+    #hero-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
   </style>
 </head>
 <body class="bg-[#0C0E1A]">
+
+  <!-- ── INTRO OVERLAY ── -->
+  <div id="intro-overlay">
+    <img id="intro-logo" src="logo sf branca.png" alt="João do Consórcio" style="height:60px;">
+    <div id="intro-line"></div>
+    <div id="intro-text">Especialista em Consórcio</div>
+  </div>
+
+  <!-- ── SCROLL PROGRESS ── -->
+  <div id="scroll-bar"></div>
 
   <!-- ── WHATSAPP FLOAT ── -->
   <a href="https://wa.me/5528999693542?text=Ol%C3%A1%20Jo%C3%A3o%2C%20quero%20uma%20simula%C3%A7%C3%A3o%20gratuita!"
@@ -161,13 +282,16 @@
 
   <!-- ── HERO ── -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
+    <canvas id="hero-canvas"></canvas>
     <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=85&fit=crop"
-           alt="Veículo premium" class="w-full h-full object-cover object-center">
+      <img id="hero-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=85&fit=crop"
+           alt="Veículo premium" class="w-full h-full object-cover object-center" style="will-change:transform;">
       <div class="hero-mask absolute inset-0"></div>
     </div>
-    <!-- glow -->
-    <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-brand-orange/8 rounded-full blur-[140px] pointer-events-none"></div>
+    <!-- orbs -->
+    <div class="orb orb-a" style="width:600px;height:600px;background:rgba(212,104,42,.07);top:10%;left:5%;"></div>
+    <div class="orb orb-b" style="width:400px;height:400px;background:rgba(27,32,88,.25);bottom:10%;right:10%;"></div>
+    <div class="orb orb-c" style="width:300px;height:300px;background:rgba(212,104,42,.05);top:50%;right:30%;"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 sm:py-36">
       <div class="max-w-3xl">
@@ -181,7 +305,7 @@
         <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] mb-6"
             data-aos="fade-up" data-aos-delay="80">
           Algumas conquistas<br>têm um nome.
-          <br><span class="text-grad">Qual é o do<br>seu próximo veículo?</span>
+          <br><span class="text-shimmer">Qual é o do<br>seu próximo veículo?</span>
         </h1>
 
         <p class="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-2xl"
@@ -220,11 +344,15 @@
   <section class="bg-[#131628] border-y border-white/5 py-12">
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
       <div data-aos="fade-up">
-        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">+500</div>
+        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">
+          +<span class="stat-num" data-target="500" data-suffix="">0</span>
+        </div>
         <div class="text-white/45 text-sm">Clientes contemplados</div>
       </div>
       <div data-aos="fade-up" data-aos-delay="80">
-        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">10+</div>
+        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">
+          <span class="stat-num" data-target="10" data-suffix="+">0</span>
+        </div>
         <div class="text-white/45 text-sm">Anos de experiência</div>
       </div>
       <div data-aos="fade-up" data-aos-delay="160">
@@ -232,7 +360,9 @@
         <div class="text-white/45 text-sm">Em juros pagos</div>
       </div>
       <div data-aos="fade-up" data-aos-delay="240">
-        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">5 ★</div>
+        <div class="font-display font-bold text-3xl sm:text-4xl text-brand-orange mb-1">
+          <span class="stat-num" data-target="5" data-suffix=" ★">0</span>
+        </div>
         <div class="text-white/45 text-sm">Avaliação dos clientes</div>
       </div>
     </div>
@@ -440,8 +570,8 @@
 
       <div class="grid md:grid-cols-3 gap-6">
         <!-- Carros -->
-        <div class="card-lift bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="0">
-          <div class="relative h-52 overflow-hidden">
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+          <div class="card-glare relative h-52 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80&fit=crop"
                  alt="Automóveis" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
             <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
@@ -468,8 +598,8 @@
         </div>
 
         <!-- Motos -->
-        <div class="card-lift bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-          <div class="relative h-52 overflow-hidden">
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-glare relative h-52 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
                  alt="Motocicletas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
             <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
@@ -495,8 +625,8 @@
         </div>
 
         <!-- Caminhões -->
-        <div class="card-lift bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-          <div class="relative h-52 overflow-hidden">
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-glare relative h-52 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80&fit=crop"
                  alt="Caminhões" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
             <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
@@ -979,24 +1109,144 @@
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 700, once: true, offset: 80, easing: 'ease-out-cubic' });
+    AOS.init({ duration: 750, once: true, offset: 80, easing: 'ease-out-cubic' });
 
+    /* ── FAQ ── */
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const body = item.querySelector('.faq-body');
       const icon = item.querySelector('.faq-icon');
       const isOpen = body.classList.contains('open');
-
       document.querySelectorAll('.faq-item').forEach(i => {
         i.querySelector('.faq-body').classList.remove('open');
         i.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
       });
-
       if (!isOpen) {
         body.classList.add('open');
         icon.style.transform = 'rotate(45deg)';
       }
     }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    const scrollBar = document.getElementById('scroll-bar');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      scrollBar.style.width = pct + '%';
+    }, { passive: true });
+
+    /* ── PARALLAX HERO ── */
+    const heroImg = document.getElementById('hero-img');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight * 1.2) {
+        heroImg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+      }
+    }, { passive: true });
+
+    /* ── HERO PARTICLES ── */
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles = [];
+
+      function resize() {
+        W = canvas.width  = canvas.parentElement.offsetWidth;
+        H = canvas.height = canvas.parentElement.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      for (let i = 0; i < 55; i++) {
+        particles.push({
+          x: Math.random() * (W || 1920),
+          y: Math.random() * (H || 900),
+          r: Math.random() * 1.6 + 0.4,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          a: Math.random() * 0.5 + 0.1,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212,104,42,${p.a})`;
+          ctx.fill();
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W;
+          if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H;
+          if (p.y > H) p.y = 0;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    /* ── COUNTER ANIMATION ── */
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
+
+    /* ── 3D CARD TILT ── */
+    document.querySelectorAll('.tilt-wrap').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        card.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-5px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    /* ── BUTTON RIPPLE ── */
+    document.querySelectorAll('a, button').forEach(btn => {
+      btn.classList.add('ripple-btn');
+      btn.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const wave = document.createElement('span');
+        wave.className = 'ripple-wave';
+        wave.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+        this.appendChild(wave);
+        setTimeout(() => wave.remove(), 600);
+      });
+    });
+
+    /* ── NAVBAR GLASS ON SCROLL ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── INTRO OVERLAY CLEANUP ── */
+    document.getElementById('intro-overlay').addEventListener('animationend', function () {
+      this.style.display = 'none';
+    });
   </script>
 </body>
 </html>
