@@ -73,6 +73,18 @@
       box-shadow: 0 20px 60px rgba(212,104,42,.18);
     }
 
+    /* Carrossel de veiculos (arrasta pro lado no mobile) */
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .veic-track { scroll-padding-left: 1.5rem; }
+    .veic-track > div { scroll-snap-align: start; }
+    @media (max-width: 767px) {
+      .veic-track > div { flex: 0 0 86%; }
+    }
+    @media (min-width: 560px) and (max-width: 767px) {
+      .veic-track > div { flex-basis: 60%; }
+    }
+
     @keyframes pulse-org {
       0%,100% { box-shadow: 0 0 0 0 rgba(212,104,42,.45); }
       50%      { box-shadow: 0 0 0 14px rgba(212,104,42,0); }
@@ -424,6 +436,109 @@
     </div>
   </section>
 
+  <!-- ── VEHICLES ── -->
+  <section id="veiculos" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <span class="inline-block bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-sm font-semibold px-4 py-2 rounded-full mb-4">
+          Portfólio completo
+        </span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
+          Qual veículo você está<br>
+          <span class="text-grad">pronto para conquistar?</span>
+        </h2>
+        <p class="text-white/50 text-lg max-w-2xl mx-auto">
+          Do carro popular ao SUV premium, da moto urbana à big trail — João tem o plano certo para você.
+        </p>
+      </div>
+
+      <div class="veic-track flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 pb-2 md:pb-0">
+        <!-- Carros -->
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+          <div class="card-glare relative h-52 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80&fit=crop"
+                 alt="Automóveis" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-brand-orange/90 text-white text-xs font-bold px-3 py-1.5 rounded-full">MAIS PROCURADO</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <i class="fas fa-car text-brand-orange text-lg"></i>
+              <h3 class="font-display font-bold text-xl">Automóveis</h3>
+            </div>
+            <p class="text-white/50 text-sm mb-5 leading-relaxed">
+              Populares, sedãs, SUVs e pickups. De entrada a veículos premium — você escolhe o modelo após a contemplação.
+            </p>
+            <div class="border-t border-white/8 pt-4 mb-5">
+              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 60.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 700/mês</div>
+            </div>
+            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20carros!"
+               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
+              Simular agora <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Motos -->
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-glare relative h-52 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
+                 alt="Motocicletas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <i class="fas fa-motorcycle text-brand-orange text-lg"></i>
+              <h3 class="font-display font-bold text-xl">Motocicletas</h3>
+            </div>
+            <p class="text-white/50 text-sm mb-5 leading-relaxed">
+              Esportivas, trail, big trails e modelos 400cc para cima. Para trabalho, aventura ou paixão sobre duas rodas.
+            </p>
+            <div class="border-t border-white/8 pt-4 mb-5">
+              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 40.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 500/mês</div>
+            </div>
+            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20motos!"
+               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
+              Simular agora <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Caminhões -->
+        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-glare relative h-52 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80&fit=crop"
+                 alt="Caminhões" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-[#1B2058]/90 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">PARA EMPRESAS</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <i class="fas fa-truck text-brand-orange text-lg"></i>
+              <h3 class="font-display font-bold text-xl">Caminhões & Pesados</h3>
+            </div>
+            <p class="text-white/50 text-sm mb-5 leading-relaxed">
+              Frota para autônomos e empresas. Leves, médios e pesados — créditos flexíveis para expandir seu negócio.
+            </p>
+            <div class="border-t border-white/8 pt-4 mb-5">
+              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 150.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 1.767/mês</div>
+            </div>
+            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20caminh%C3%B5es!"
+               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
+              Simular agora <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="comparativo" class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
 
@@ -686,109 +801,6 @@
           <p class="text-white/60 text-sm leading-relaxed">
             Com o recurso do <strong class="text-brand-orange">lance</strong>, você oferece um valor adicional e, se for o maior, é contemplado naquele mês — sem esperar o sorteio. João te orienta em toda a estratégia de lance.
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── VEHICLES ── -->
-  <section id="veiculos" class="py-24 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <span class="inline-block bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-sm font-semibold px-4 py-2 rounded-full mb-4">
-          Portfólio completo
-        </span>
-        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
-          Qual veículo você está<br>
-          <span class="text-grad">pronto para conquistar?</span>
-        </h2>
-        <p class="text-white/50 text-lg max-w-2xl mx-auto">
-          Do carro popular ao SUV premium, da moto urbana à big trail — João tem o plano certo para você.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Carros -->
-        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="0">
-          <div class="card-glare relative h-52 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80&fit=crop"
-                 alt="Automóveis" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-brand-orange/90 text-white text-xs font-bold px-3 py-1.5 rounded-full">MAIS PROCURADO</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3">
-              <i class="fas fa-car text-brand-orange text-lg"></i>
-              <h3 class="font-display font-bold text-xl">Automóveis</h3>
-            </div>
-            <p class="text-white/50 text-sm mb-5 leading-relaxed">
-              Populares, sedãs, SUVs e pickups. De entrada a veículos premium — você escolhe o modelo após a contemplação.
-            </p>
-            <div class="border-t border-white/8 pt-4 mb-5">
-              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 60.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 700/mês</div>
-            </div>
-            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20carros!"
-               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
-              Simular agora <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Motos -->
-        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-glare relative h-52 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
-                 alt="Motocicletas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3">
-              <i class="fas fa-motorcycle text-brand-orange text-lg"></i>
-              <h3 class="font-display font-bold text-xl">Motocicletas</h3>
-            </div>
-            <p class="text-white/50 text-sm mb-5 leading-relaxed">
-              Esportivas, trail, big trails e modelos 400cc para cima. Para trabalho, aventura ou paixão sobre duas rodas.
-            </p>
-            <div class="border-t border-white/8 pt-4 mb-5">
-              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 40.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 500/mês</div>
-            </div>
-            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20motos!"
-               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
-              Simular agora <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Caminhões -->
-        <div class="card-lift tilt-wrap bg-[#131628] border border-white/8 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-glare relative h-52 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80&fit=crop"
-                 alt="Caminhões" class="w-full h-full object-cover transition-transform duration-500 hover:scale-108">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#131628] via-transparent to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-[#1B2058]/90 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">PARA EMPRESAS</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3">
-              <i class="fas fa-truck text-brand-orange text-lg"></i>
-              <h3 class="font-display font-bold text-xl">Caminhões & Pesados</h3>
-            </div>
-            <p class="text-white/50 text-sm mb-5 leading-relaxed">
-              Frota para autônomos e empresas. Leves, médios e pesados — créditos flexíveis para expandir seu negócio.
-            </p>
-            <div class="border-t border-white/8 pt-4 mb-5">
-              <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 150.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 1.767/mês</div>
-            </div>
-            <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20caminh%C3%B5es!"
-               class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
-              Simular agora <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
         </div>
       </div>
     </div>
