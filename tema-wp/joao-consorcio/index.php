@@ -388,6 +388,147 @@
     </div>
   </section>
 
+  <section id="comparativo" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="text-center mb-12" data-aos="fade-up">
+        <span class="inline-block bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-sm font-semibold px-4 py-2 rounded-full mb-4">
+          Simulador de Economia
+        </span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-3">
+          Simule e veja a diferença<br><span class="text-grad">nos números reais</span>
+        </h2>
+        <p class="text-white/50 text-lg">Escolha o tipo de bem, o crédito e o prazo</p>
+      </div>
+
+      <!-- TIPO -->
+      <div class="flex justify-center gap-3 mb-8" data-aos="fade-up">
+        <button id="sim-btn-veiculo" type="button" onclick="simSetTipo('veiculo')"
+          class="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-2 transition-all duration-200">
+          <i class="fas fa-car"></i> Veículo
+        </button>
+        <button id="sim-btn-imovel" type="button" onclick="simSetTipo('imovel')"
+          class="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-2 transition-all duration-200">
+          <i class="fas fa-house"></i> Imóvel
+        </button>
+      </div>
+
+      <!-- VALORES -->
+      <div class="mb-8 text-center" data-aos="fade-up">
+        <p class="text-white/40 text-xs uppercase tracking-widest mb-4 font-medium">Valor do crédito</p>
+        <div id="sim-valores" class="flex flex-wrap gap-2 justify-center"></div>
+      </div>
+
+      <!-- PRAZO -->
+      <div class="mb-10 text-center" data-aos="fade-up">
+        <p class="text-white/40 text-xs uppercase tracking-widest mb-2 font-medium">Prazo do financiamento</p>
+        <p id="sim-prazo-hint" class="text-white/30 text-xs mb-4 max-w-md mx-auto">O consórcio é sempre dividido em até <span class="text-brand-orange font-semibold">84x</span> — escolha o prazo do financiamento para comparar.</p>
+        <div id="sim-prazos" class="inline-flex flex-wrap justify-center max-w-full bg-[#131628] border border-white/8 rounded-full p-1 gap-1"></div>
+      </div>
+
+      <!-- RESULTADO -->
+      <div class="grid md:grid-cols-2 gap-5 mb-5" data-aos="fade-up">
+
+        <!-- FINANCIAMENTO -->
+        <div class="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
+          <div class="bg-[#131628] px-6 py-4 flex items-center gap-3 border-b border-white/8">
+            <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-times text-red-400 text-xs"></i>
+            </div>
+            <div class="flex-1 flex items-center justify-between gap-2">
+              <div>
+                <span class="font-display font-bold text-base block">Financiamento Tradicional</span>
+                <span class="text-white/40 text-xs font-medium">Prazo limitado a 60 meses</span>
+              </div>
+              <span class="flex-shrink-0 text-xs bg-red-500/10 text-red-400/80 border border-red-500/20 px-2.5 py-1 rounded-full font-bold tracking-wide">LIMITADO</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
+              <span class="text-white/50 text-sm">Parcela / mês</span>
+              <span id="sim-fin-parcela" class="font-display font-bold text-xl text-red-400 tabular-nums">—</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
+              <span class="text-white/50 text-sm">Taxa de juros</span>
+              <span id="sim-fin-taxa-label" class="text-red-400 font-semibold text-sm">3% ao mês</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
+              <span class="text-white/50 text-sm">Prazo máximo</span>
+              <span class="text-red-400/80 font-semibold text-sm flex items-center gap-1.5"><i class="fas fa-lock text-xs opacity-70"></i> 60 meses</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
+              <span class="text-white/50 text-sm">Total em juros</span>
+              <span id="sim-fin-juros" class="text-red-400 font-semibold text-sm tabular-nums">—</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5">
+              <span class="text-white/70 text-sm font-semibold">Total pago</span>
+              <span id="sim-fin-total" class="font-display font-bold text-2xl text-red-400 tabular-nums">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONSÓRCIO -->
+        <div class="bg-brand-orange/5 border border-brand-orange/30 rounded-2xl overflow-hidden">
+          <div class="bg-gradient-to-r from-brand-orange to-brand-orangeL px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="fas fa-trophy text-yellow-300 text-sm"></i>
+              <div>
+                <span class="font-display font-bold text-base block">Consórcio João Vitor</span>
+                <span class="text-white/85 text-xs font-semibold flex items-center gap-1"><i class="fas fa-calendar-check text-white/70 text-xs"></i> <span id="sim-con-prazo-header">Parcelado em até 84x</span></span>
+              </div>
+            </div>
+            <span class="bg-white/25 text-white text-xs font-bold px-2.5 py-1 rounded-full">MELHOR OPÇÃO</span>
+          </div>
+          <div class="p-6">
+            <div id="sim-con-row-antes" class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
+              <span id="sim-con-antes-label" class="text-white/50 text-sm">Parcela em 84x</span>
+              <span id="sim-con-antes" class="font-display font-bold text-xl text-green-400 tabular-nums">—</span>
+            </div>
+            <div id="sim-con-row-apos" class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
+              <span id="sim-con-parcela-label" class="text-white/50 text-sm">Após contemplação</span>
+              <span id="sim-con-parcela" class="font-display font-bold text-base text-green-400/80 tabular-nums">—</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
+              <span class="text-white/50 text-sm">Juros</span>
+              <span class="text-green-400 font-semibold text-sm">0% de juros</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
+              <span class="text-white/50 text-sm">Taxa administrativa</span>
+              <span id="sim-con-taxa-label" class="text-brand-orange font-semibold text-sm">16% total</span>
+            </div>
+            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
+              <span class="text-white/50 text-sm">Prazo disponível</span>
+              <span class="text-green-400 font-semibold text-sm flex items-center gap-1.5"><i class="fas fa-arrow-up text-xs"></i> <span id="sim-con-prazo-label">Em até 84x</span></span>
+            </div>
+            <div class="flex justify-between items-center py-3.5">
+              <span class="text-white/70 text-sm font-semibold">Total pago</span>
+              <span id="sim-con-total" class="font-display font-bold text-2xl text-green-400 tabular-nums">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECONOMIA -->
+      <div class="bg-green-500/8 border border-green-500/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-5" data-aos="fade-up">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 bg-green-500/15 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-piggy-bank text-green-400 text-2xl"></i>
+          </div>
+          <div>
+            <div id="sim-economia-label" class="text-white/50 text-sm mb-1">Com o consórcio, você economiza</div>
+            <div id="sim-economia-val" class="font-display font-bold text-3xl sm:text-4xl text-green-400 tabular-nums">—</div>
+          </div>
+        </div>
+        <a href="https://wa.me/5528999693542?text=Ol%C3%A1%20Jo%C3%A3o!%20Quero%20uma%20simula%C3%A7%C3%A3o%20gratuita!"
+           class="flex-shrink-0 inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeL text-white px-7 py-3.5 rounded-full font-bold text-sm transition-all hover:scale-105">
+          <i class="fab fa-whatsapp text-base"></i> Simular com João
+        </a>
+      </div>
+
+      <p id="sim-footnote" class="text-center text-white/25 text-xs mt-4">*Taxa de referência: 3% a.m. (financiamento). Taxa administrativa do consórcio: 16% total. Valores aproximados para fins ilustrativos.</p>
+    </div>
+  </section>
+
   <!-- PROBLEM -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
@@ -527,8 +668,8 @@
             <p class="text-white/50 text-sm mb-5 leading-relaxed">Populares, sedãs, SUVs e pickups. De entrada a veículos premium — você escolhe o modelo após a contemplação.</p>
             <div class="border-t border-white/8 pt-4 mb-5">
               <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 30.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 350/mês</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 60.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 700/mês</div>
             </div>
             <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20carros!"
                class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
@@ -543,11 +684,11 @@
           </div>
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3"><i class="fas fa-motorcycle text-brand-orange text-lg"></i><h3 class="font-display font-bold text-xl">Motocicletas</h3></div>
-            <p class="text-white/50 text-sm mb-5 leading-relaxed">Scooters, trail, esportivas e big trails. Para uso urbano, trabalho ou aventura — com o menor custo possível.</p>
+            <p class="text-white/50 text-sm mb-5 leading-relaxed">Esportivas, trail, big trails e modelos 400cc para cima. Para trabalho, aventura ou paixão sobre duas rodas.</p>
             <div class="border-t border-white/8 pt-4 mb-5">
               <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 8.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 120/mês</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 40.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 500/mês</div>
             </div>
             <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20motos!"
                class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
@@ -566,8 +707,8 @@
             <p class="text-white/50 text-sm mb-5 leading-relaxed">Frota para autônomos e empresas. Leves, médios e pesados — créditos flexíveis para expandir seu negócio.</p>
             <div class="border-t border-white/8 pt-4 mb-5">
               <div class="text-xs text-white/35 mb-1">Crédito a partir de</div>
-              <div class="font-display font-bold text-2xl text-white">R$ 100.000</div>
-              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 1.200/mês</div>
+              <div class="font-display font-bold text-2xl text-white">R$ 150.000</div>
+              <div class="text-xs text-white/35 mt-0.5">Parcelas a partir de R$ 1.767/mês</div>
             </div>
             <a href="https://wa.me/5528999693542?text=Quero%20simular%20cons%C3%B3rcio%20de%20caminh%C3%B5es!"
                class="w-full flex items-center justify-center gap-2 border border-brand-orange/30 hover:bg-brand-orange text-brand-orange hover:text-white py-3 rounded-xl text-sm font-semibold transition-all">
@@ -606,7 +747,7 @@
         <div class="card-lift bg-[#131628] border border-white/8 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="0">
           <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-sliders text-brand-orange text-xl"></i></div>
           <h3 class="font-display font-bold text-lg mb-3">Planos Flexíveis</h3>
-          <p class="text-white/50 text-sm leading-relaxed">De 12 a 100 meses. Créditos de R$ 8.000 a R$ 500.000+. Você monta o plano que faz sentido para a sua realidade.</p>
+          <p class="text-white/50 text-sm leading-relaxed">De 12 a 100 meses. Créditos de R$ 40.000 a R$ 500.000+. Você monta o plano que faz sentido para a sua realidade.</p>
         </div>
         <div class="card-lift bg-[#131628] border border-white/8 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="80">
           <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-user-tie text-brand-orange text-xl"></i></div>
@@ -619,147 +760,6 @@
           <p class="text-white/50 text-sm leading-relaxed">Simulação, contratação e acompanhamento totalmente pelo WhatsApp. Sem filas, sem papelada desnecessária.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- SIMULADOR INTERATIVO -->
-  <section id="comparativo" class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-
-      <div class="text-center mb-12" data-aos="fade-up">
-        <span class="inline-block bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-sm font-semibold px-4 py-2 rounded-full mb-4">
-          Simulador de Economia
-        </span>
-        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-3">
-          Simule e veja a diferença<br><span class="text-grad">nos números reais</span>
-        </h2>
-        <p class="text-white/50 text-lg">Escolha o tipo de bem, o crédito e o prazo</p>
-      </div>
-
-      <!-- TIPO -->
-      <div class="flex justify-center gap-3 mb-8" data-aos="fade-up">
-        <button id="sim-btn-veiculo" type="button" onclick="simSetTipo('veiculo')"
-          class="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-2 transition-all duration-200">
-          <i class="fas fa-car"></i> Veículo
-        </button>
-        <button id="sim-btn-imovel" type="button" onclick="simSetTipo('imovel')"
-          class="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-2 transition-all duration-200">
-          <i class="fas fa-house"></i> Imóvel
-        </button>
-      </div>
-
-      <!-- VALORES -->
-      <div class="mb-8 text-center" data-aos="fade-up">
-        <p class="text-white/40 text-xs uppercase tracking-widest mb-4 font-medium">Valor do crédito</p>
-        <div id="sim-valores" class="flex flex-wrap gap-2 justify-center"></div>
-      </div>
-
-      <!-- PRAZO -->
-      <div class="mb-10 text-center" data-aos="fade-up">
-        <p class="text-white/40 text-xs uppercase tracking-widest mb-4 font-medium">Prazo de pagamento</p>
-        <div id="sim-prazos" class="inline-flex bg-[#131628] border border-white/8 rounded-full p-1 gap-1"></div>
-      </div>
-
-      <!-- RESULTADO -->
-      <div class="grid md:grid-cols-2 gap-5 mb-5" data-aos="fade-up">
-
-        <!-- FINANCIAMENTO -->
-        <div class="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
-          <div class="bg-[#131628] px-6 py-4 flex items-center gap-3 border-b border-white/8">
-            <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0">
-              <i class="fas fa-times text-red-400 text-xs"></i>
-            </div>
-            <div class="flex-1 flex items-center justify-between gap-2">
-              <div>
-                <span class="font-display font-bold text-base block">Financiamento Tradicional</span>
-                <span class="text-white/40 text-xs font-medium">Prazo limitado a 60 meses</span>
-              </div>
-              <span class="flex-shrink-0 text-xs bg-red-500/10 text-red-400/80 border border-red-500/20 px-2.5 py-1 rounded-full font-bold tracking-wide">LIMITADO</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
-              <span class="text-white/50 text-sm">Parcela / mês</span>
-              <span id="sim-fin-parcela" class="font-display font-bold text-xl text-red-400 tabular-nums">—</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
-              <span class="text-white/50 text-sm">Taxa de juros</span>
-              <span id="sim-fin-taxa-label" class="text-red-400 font-semibold text-sm">3% ao mês</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
-              <span class="text-white/50 text-sm">Prazo máximo</span>
-              <span class="text-red-400/80 font-semibold text-sm flex items-center gap-1.5"><i class="fas fa-lock text-xs opacity-70"></i> 60 meses</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-white/5">
-              <span class="text-white/50 text-sm">Total em juros</span>
-              <span id="sim-fin-juros" class="text-red-400 font-semibold text-sm tabular-nums">—</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5">
-              <span class="text-white/70 text-sm font-semibold">Total pago</span>
-              <span id="sim-fin-total" class="font-display font-bold text-2xl text-red-400 tabular-nums">—</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONSÓRCIO -->
-        <div class="bg-brand-orange/5 border border-brand-orange/30 rounded-2xl overflow-hidden">
-          <div class="bg-gradient-to-r from-brand-orange to-brand-orangeL px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i class="fas fa-trophy text-yellow-300 text-sm"></i>
-              <div>
-                <span class="font-display font-bold text-base block">Consórcio João Vitor</span>
-                <span class="text-white/85 text-xs font-semibold flex items-center gap-1"><i class="fas fa-calendar-check text-white/70 text-xs"></i> Até 100 meses de prazo</span>
-              </div>
-            </div>
-            <span class="bg-white/25 text-white text-xs font-bold px-2.5 py-1 rounded-full">MELHOR OPÇÃO</span>
-          </div>
-          <div class="p-6">
-            <div id="sim-con-row-antes" class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
-              <span class="text-white/50 text-sm">Antes da contemplação</span>
-              <span id="sim-con-antes" class="font-display font-bold text-base text-green-400/80 tabular-nums">—</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
-              <span id="sim-con-parcela-label" class="text-white/50 text-sm">Após contemplação</span>
-              <span id="sim-con-parcela" class="font-display font-bold text-xl text-green-400 tabular-nums">—</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
-              <span class="text-white/50 text-sm">Juros</span>
-              <span class="text-green-400 font-semibold text-sm">0% de juros</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
-              <span class="text-white/50 text-sm">Taxa administrativa</span>
-              <span id="sim-con-taxa-label" class="text-brand-orange font-semibold text-sm">16% total</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5 border-b border-brand-orange/10">
-              <span class="text-white/50 text-sm">Prazo disponível</span>
-              <span class="text-green-400 font-semibold text-sm flex items-center gap-1.5"><i class="fas fa-arrow-up text-xs"></i> Até 100 meses</span>
-            </div>
-            <div class="flex justify-between items-center py-3.5">
-              <span class="text-white/70 text-sm font-semibold">Total pago</span>
-              <span id="sim-con-total" class="font-display font-bold text-2xl text-green-400 tabular-nums">—</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ECONOMIA -->
-      <div class="bg-green-500/8 border border-green-500/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-5" data-aos="fade-up">
-        <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-green-500/15 rounded-xl flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-piggy-bank text-green-400 text-2xl"></i>
-          </div>
-          <div>
-            <div class="text-white/50 text-sm mb-1">Com o consórcio, você economiza</div>
-            <div id="sim-economia-val" class="font-display font-bold text-3xl sm:text-4xl text-green-400 tabular-nums">—</div>
-          </div>
-        </div>
-        <a href="https://wa.me/5528999693542?text=Ol%C3%A1%20Jo%C3%A3o!%20Quero%20uma%20simula%C3%A7%C3%A3o%20gratuita!"
-           class="flex-shrink-0 inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeL text-white px-7 py-3.5 rounded-full font-bold text-sm transition-all hover:scale-105">
-          <i class="fab fa-whatsapp text-base"></i> Simular com João
-        </a>
-      </div>
-
-      <p id="sim-footnote" class="text-center text-white/25 text-xs mt-4">*Taxa de referência: 3% a.m. (financiamento). Taxa administrativa do consórcio: 16% total. Valores aproximados para fins ilustrativos.</p>
     </div>
   </section>
 
@@ -1081,7 +1081,7 @@
           imovel:  [200000, 300000, 600000, 1000000]
         },
         prazos: {
-          veiculo: [24, 36, 48],
+          veiculo: [24, 36, 48, 60, 84],
           imovel:  [120, 240, 420]
         }
       };
@@ -1131,8 +1131,9 @@
         el.style.borderColor = on ? '#D4682A' : 'rgba(255,255,255,0.15)';
       }
       function stiloPrazo(el, on) {
+        var only = el.dataset.only === '1';
         el.style.background = on ? '#D4682A' : 'transparent';
-        el.style.color      = on ? '#fff' : 'rgba(255,255,255,0.45)';
+        el.style.color      = on ? '#fff' : (only ? 'rgba(212,104,42,0.95)' : 'rgba(255,255,255,0.45)');
       }
 
       function renderValores() {
@@ -1160,7 +1161,12 @@
           btn.type = 'button';
           btn.id = 'sim-prazo-' + p;
           btn.className = 'px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200';
-          btn.textContent = p + ' meses';
+          if (p === 84) {
+            btn.dataset.only = '1';
+            btn.innerHTML = '84 meses <span style="font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.85;margin-left:3px">só consórcio</span>';
+          } else {
+            btn.textContent = p + ' meses';
+          }
           btn.addEventListener('click', function () { window.simSetPrazo(p); });
           stiloPrazo(btn, p === SIM.prazo);
           c.appendChild(btn);
@@ -1179,31 +1185,52 @@
 
         function set(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
 
-        set('sim-fin-parcela',    fmt2(parFin));
-        set('sim-fin-juros',      fmt(jurFin));
-        set('sim-fin-total',      fmt(totFin));
+        var fin84 = (SIM.tipo === 'veiculo' && SIM.prazo === 84);
+
+        if (fin84) {
+          set('sim-fin-parcela',    'Indisponível');
+          set('sim-fin-juros',      '—');
+          set('sim-fin-total',      '—');
+          set('sim-economia-label', 'O banco não financia em 84x');
+          set('sim-economia-val',   'Só no consórcio');
+        } else {
+          set('sim-fin-parcela',    fmt2(parFin));
+          set('sim-fin-juros',      fmt(jurFin));
+          set('sim-fin-total',      fmt(totFin));
+          set('sim-economia-label', 'Com o consórcio, você economiza');
+          set('sim-economia-val',   fmt(econ));
+        }
         set('sim-con-total',      fmt(totCon));
-        set('sim-economia-val',   fmt(econ));
-        set('sim-fin-taxa-label', isImovel ? '0,95% ao mês' : '3% ao mês');
+        set('sim-fin-taxa-label', fin84 ? '—' : (isImovel ? '0,95% ao mês' : '3% ao mês'));
         set('sim-con-taxa-label', isImovel ? '27% total'    : '16% total');
         set('sim-footnote',       isImovel
           ? '*Taxa de referência: 0,95% a.m. (financiamento). Taxa administrativa do consórcio: 27% total. Valores aproximados para fins ilustrativos.'
           : '*Taxa de referência: 3% a.m. (financiamento). Taxa administrativa do consórcio: 16% total. Valores aproximados para fins ilustrativos.');
 
-        var rowAntes   = document.getElementById('sim-con-row-antes');
-        var lblParcela = document.getElementById('sim-con-parcela-label');
+        var hintEl = document.getElementById('sim-prazo-hint');
+        if (hintEl) {
+          hintEl.innerHTML = isImovel
+            ? 'O consórcio de imóvel pode ser dividido em até <span class="text-brand-orange font-semibold">204x</span> — escolha o prazo do financiamento para comparar.'
+            : 'O consórcio é sempre dividido em até <span class="text-brand-orange font-semibold">84x</span> — escolha o prazo do financiamento para comparar.';
+        }
+
+        var rowApos = document.getElementById('sim-con-row-apos');
 
         if (SIM.tipo === 'veiculo') {
           var d = CON.veiculo[SIM.valor] || {};
-          set('sim-con-antes',   fmt2(d.antes || 0));
-          set('sim-con-parcela', fmt2(d.apos  || 0));
-          if (rowAntes)   rowAntes.style.display  = '';
-          if (lblParcela) lblParcela.textContent   = 'Após contemplação';
+          set('sim-con-antes-label',  'Parcela em 84x');
+          set('sim-con-antes',        fmt2(d.antes || 0));
+          set('sim-con-parcela',      fmt2(d.apos  || 0));
+          if (rowApos) rowApos.style.display = '';
+          set('sim-con-prazo-label',  'Em até 84x');
+          set('sim-con-prazo-header', 'Parcelado em até 84x');
         } else {
           var d2 = CON.imovel[SIM.valor] || {};
-          set('sim-con-parcela', fmt2(d2.parcela || 0));
-          if (rowAntes)   rowAntes.style.display  = 'none';
-          if (lblParcela) lblParcela.textContent   = 'Parcela mensal';
+          set('sim-con-antes-label',  'Parcela mensal');
+          set('sim-con-antes',        fmt2(d2.parcela || 0));
+          if (rowApos) rowApos.style.display = 'none';
+          set('sim-con-prazo-label',  'Em até 204x');
+          set('sim-con-prazo-header', 'Parcelado em até 204x');
         }
       }
 
