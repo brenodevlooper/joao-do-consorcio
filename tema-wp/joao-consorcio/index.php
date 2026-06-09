@@ -800,7 +800,7 @@
           <div class="md:w-52 flex-shrink-0 overflow-hidden">
             <img src="<?php echo get_template_directory_uri(); ?>/WhatsApp Image 2026-03-25 at 20.40.39.jpeg"
                  alt="Depoimento Dalva Lima no WhatsApp"
-                 class="w-full h-64 md:h-full object-cover object-top">
+                 class="w-full h-auto object-top md:h-full md:object-cover">
           </div>
           <div class="p-7 flex flex-col justify-center">
             <div class="flex gap-1 mb-3">
